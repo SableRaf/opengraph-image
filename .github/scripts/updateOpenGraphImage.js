@@ -1,11 +1,18 @@
 require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
 const GitHubAPI = require('./fetchRepoData');
 const ImageGenerator = require('./renderImage');
 
-const owner = 'processing';
-const repo = 'processing4';
+const argv = yargs(hideBin(process.argv)).options({
+    o: { type: 'string', alias: 'owner', default: 'octocat', describe: 'Repository owner' },
+    r: { type: 'string', alias: 'repo', default: 'Hello-World', describe: 'Repository name' }
+}).argv;
+
+const owner = argv.owner;
+const repo = argv.repo;
 
 async function main() {
     console.log('Starting image generation process...');
