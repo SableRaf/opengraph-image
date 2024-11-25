@@ -28,9 +28,19 @@
     }
     .stats {
       font-size: 30px;
+      display: flex;
+      flex-direction: column;
     }
     .stats div {
+      display: flex;
+      align-items: center;
       margin-bottom: 10px;
+    }
+    .stats img {
+      margin-right: 10px;
+      width: 24px;
+      height: 24px;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
     }
   </style>
 </head>
@@ -38,9 +48,18 @@
   <div class="repo-name">{{full_name}}</div>
   <div class="description">{{description}}</div>
   <div class="stats">
-    <div>⭐ Stars: {{stars}}</div>
-    <div>🔀 Forks: {{forks}}</div>
-    <div>👥 Contributors: {{contributors}}</div>
+    <div>
+      <img src="{{{star_icon}}}" alt="Stars">
+      Stars: {{stars}}
+    </div>
+    <div>
+      <img src="{{{fork_icon}}}" alt="Forks">
+      Forks: {{forks}}
+    </div>
+    <div>
+      <img src="{{{contributors_icon}}}" alt="Contributors">
+      Contributors: {{contributors}}
+    </div>
   </div>
 </body>
 </html>

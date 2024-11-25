@@ -14,10 +14,19 @@ class ImageGenerator {
         return `data:image/png;base64,${imageBuffer.toString('base64')}`;
     }
 
+    getIconDataUrl(iconName) {
+        const iconPath = path.join(this.templatesPath, 'assets', 'icons', `${iconName}.svg`);
+        const iconBuffer = fs.readFileSync(iconPath);
+        return `data:image/svg+xml;base64,${iconBuffer.toString('base64')}`;
+    }
+
     renderTemplate(data) {
         const templatePath = path.join(this.templatesPath, 'template.html');
         const template = fs.readFileSync(templatePath, 'utf8');
         data.background_image = this.getImageDataUrl();
+        data.star_icon = this.getIconDataUrl('star');
+        data.fork_icon = this.getIconDataUrl('git-fork');
+        data.contributors_icon = this.getIconDataUrl('group');
         return mustache.render(template, data);
     }
 
