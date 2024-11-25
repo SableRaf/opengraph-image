@@ -1,7 +1,8 @@
--[] Add the visualization of the languages used
--[] Replicate the layout of the original
 -[] Use the right font
+-[] Add the visualization of the languages used
 -[] Include the PFP of the repo owner
+-[] Replicate the layout of the original
+-[] Add instructions to set the og image in the repo settings
 -[] Make all the stats in a single row
 -[] Make all the stats optional (skip if the count is zero)
 -[] Include issue count
