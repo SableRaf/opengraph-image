@@ -22,15 +22,17 @@ async function main() {
     const api = new GitHubAPI(owner, repo, process.env.GITHUB_TOKEN);
     const repoData = await api.fetchRepoData();
     const contributorsCount = await api.fetchContributorsCount();
+    const languages = await api.fetchLanguages();
 
-    if (repoData && contributorsCount !== undefined) {
-        console.log('Fetched repository data and contributors count successfully.');
+    if (repoData && contributorsCount !== undefined && languages) {
+        console.log('Fetched repository data, contributors count, and languages successfully.');
         const data = {
             full_name: repoData.full_name,
             description: repoData.description || '',
             stars: repoData.stargazers_count,
             forks: repoData.forks_count,
             contributors: contributorsCount,
+            languages: Object.keys(languages).join(', '), // Convert languages to a comma-separated string
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');

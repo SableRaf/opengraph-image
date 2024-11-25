@@ -47,6 +47,20 @@ class GitHubAPI {
             console.error('Error fetching contributors count:', error);
         }
     }
+
+    async fetchLanguages() {
+        console.log(`Fetching languages from ${this.apiUrl}/languages`);
+        try {
+            const response = await fetch(`${this.apiUrl}/languages`, { headers: this.headers });
+            if (!response.ok) {
+                throw new Error(`GitHub API responded with status ${response.status}`);
+            }
+            console.log('Languages fetched successfully.');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching languages:', error);
+        }
+    }
 }
 
 module.exports = GitHubAPI;
