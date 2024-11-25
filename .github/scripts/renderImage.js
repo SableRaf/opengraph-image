@@ -21,7 +21,7 @@ class ImageGenerator {
     }
 
     getFontDataUrl() {
-        const fontPath = path.join(this.templatesPath, 'assets', 'fonts', 'Mona-Sans.woff2');
+        const fontPath = path.join(this.templatesPath, 'assets', 'fonts', 'MonaSansVF-Regular.woff2');
         const fontBuffer = fs.readFileSync(fontPath);
         return `data:font/woff2;base64,${fontBuffer.toString('base64')}`;
     }
@@ -33,16 +33,16 @@ class ImageGenerator {
         data.star_icon = this.getIconDataUrl('star');
         data.fork_icon = this.getIconDataUrl('repo-forked');
         data.contributors_icon = this.getIconDataUrl('people');
-        data.font_url = this.getFontDataUrl();
+        data.font_url = this.getFontDataUrl(); // Use the data URL
         data.baseURL = baseURL;
         return mustache.render(template, data);
     }
 
-    async generateImage(html, baseURL) {
+    async generateImage(html, baseURL, headless = true, keepOpen = false) { // Add keepOpen parameter
         const browser = await puppeteer.launch({
             defaultViewport: { width: 1200, height: 630, deviceScaleFactor: 1 },
             args: ['--no-sandbox', '--disable-setuid-sandbox', '--allow-file-access-from-files', '--enable-local-file-accesses'],
-            headless: true
+            headless: headless // Use the headless parameter
         });
 
         const page = await browser.newPage();
@@ -80,11 +80,28 @@ class ImageGenerator {
             });
         });
 
+        // Log relevant computed styles for debugging
+        // await page.evaluate(() => {
+        //     const elements = document.querySelectorAll('.repo-name, .description, .stats');
+        //     elements.forEach(el => {
+        //         const styles = getComputedStyle(el);
+        //         console.log(`Computed styles for ${el.className}:`);
+        //         console.log(`font-family: ${styles.getPropertyValue('font-family')}`);
+        //         console.log(`font-size: ${styles.getPropertyValue('font-size')}`);
+        //         console.log(`font-weight: ${styles.getPropertyValue('font-weight')}`);
+        //         console.log(`font-feature-settings: ${styles.getPropertyValue('font-feature-settings')}`);
+        //     });
+        // });
+
         // Increase wait time to ensure font is loaded
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         const buffer = await page.screenshot({ type: 'png' });
-        await browser.close();
+
+        if (!keepOpen) {
+            await browser.close();
+        }
+
         return buffer;
     }
 }
