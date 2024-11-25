@@ -1,0 +1,8 @@
+-[] Add the visualization of the languages used
+-[] Replicate the layout of the original
+-[] Use the right font
+-[] Include the PFP of the repo owner
+-[] Make all the stats in a single row
+-[] Make all the stats optional (skip if the count is zero)
+-[] Include issue count
+-[] Include discussion count
