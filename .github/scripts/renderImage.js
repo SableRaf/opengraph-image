@@ -33,8 +33,9 @@ class ImageGenerator {
         data.star_icon = this.getIconDataUrl('star');
         data.fork_icon = this.getIconDataUrl('repo-forked');
         data.contributors_icon = this.getIconDataUrl('people');
-        data.font_url = this.getFontDataUrl(); // Use the data URL
+        data.font_url = this.getFontDataUrl();
         data.baseURL = baseURL;
+        data.language_distribution = data.language_distribution || [];
         return mustache.render(template, data);
     }
 

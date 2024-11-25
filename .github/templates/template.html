@@ -63,6 +63,19 @@
       font-size: 30px;
       margin-top: 20px;
     }
+    .language-bar {
+      display: flex;
+      height: 20px;
+      margin-top: 20px;
+      border-radius: 0;
+      overflow: hidden;
+      width: 100%;
+      min-height: 20px;
+    }
+    .language-bar div {
+      height: 20px; /* Ensure the divs have a fixed height */
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -82,8 +95,10 @@
       Contributors: {{contributors}}
     </div>
   </div>
-  <div class="languages">
-    Languages: {{languages}}
+  <div class="language-bar">
+    {{#language_distribution}}
+      <div style="width: {{percentage}}%; background-color: {{color}};" title="{{name}}"></div>
+    {{/language_distribution}}
   </div>
 </body>
 </html>

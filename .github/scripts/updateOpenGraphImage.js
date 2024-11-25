@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
+const yaml = require('js-yaml');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const GitHubAPI = require('./fetchRepoData');
@@ -26,6 +27,17 @@ async function main() {
 
     if (repoData && contributorsCount !== undefined && languages) {
         console.log('Fetched repository data, contributors count, and languages successfully.');
+        const totalBytes = Object.values(languages).reduce((acc, bytes) => acc + bytes, 0);
+        const languageDistribution = Object.entries(languages).map(([name, bytes]) => {
+            const percentage = ((bytes / totalBytes) * 100).toFixed(2);
+            console.log(`Language: ${name}, Percentage: ${percentage}%`);
+            return {
+                name,
+                percentage,
+                color: getColorForLanguage(name) // Function to get color for each language
+            };
+        });
+
         const data = {
             full_name: repoData.full_name,
             description: repoData.description || '',
@@ -33,6 +45,7 @@ async function main() {
             forks: repoData.forks_count,
             contributors: contributorsCount,
             languages: Object.keys(languages).join(', '), // Convert languages to a comma-separated string
+            language_distribution: languageDistribution
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');
@@ -50,6 +63,19 @@ async function main() {
     } else {
         console.error('Failed to fetch all data.');
     }
+}
+
+// Load the color pairings from linguist-colors.yml
+let colors = {};
+try {
+    const fileContents = fs.readFileSync(path.join(__dirname, 'linguist-colors.yml'), 'utf8');
+    colors = yaml.load(fileContents);
+} catch (e) {
+    console.log(e);
+}
+
+function getColorForLanguage(language) {
+    return colors[language] || '#FFFFFF'; // Default to white if color not found
 }
 
 main();
