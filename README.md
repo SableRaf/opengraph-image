@@ -6,7 +6,7 @@ This tool generates an OG image that displays the repository details and stats. 
 
 ## Usage
 
-1. Create a new repository in your GitHub
+[TBD]
 
 ## References
 
