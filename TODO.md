@@ -1,4 +1,4 @@
--[] Use the right font
+-[x] Use the right font
 -[] Add the visualization of the languages used
 -[] Include the PFP of the repo owner
 -[] Replicate the layout of the original
