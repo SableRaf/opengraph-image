@@ -3,11 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <style>
+    @font-face {
+      font-family: 'Mona Sans';
+      src: url('{{{font_url}}}') format('woff2');
+      font-weight: 200 900;
+      font-stretch: 75% 125%;
+      font-display: block;
+    }
+
+    * {
+      font-feature-settings: "ss06" on, "ss05" on;
+    }
+
+    html {
+      font-family: 'Mona Sans', sans-serif;
+    }
+
     body {
       width: 1200px;
       height: 630px;
       margin: 0;
-      font-family: 'Arial', sans-serif;
       background-image: url('{{{background_image}}}');
       background-size: cover;
       color: #ffffff;
@@ -17,6 +32,8 @@
       padding: 50px;
       box-sizing: border-box;
     }
+
+
     .repo-name {
       font-size: 60px;
       font-weight: bold;

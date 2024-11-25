@@ -34,7 +34,7 @@ async function main() {
         const baseURL = path.resolve(templatesPath).replace(/\\/g, '/');
         
         const imageGenerator = new ImageGenerator(templatesPath);
-        const html = imageGenerator.renderTemplate(data);
+        const html = imageGenerator.renderTemplate(data, baseURL);
         console.log('Rendered HTML template successfully.');
         const imageBuffer = await imageGenerator.generateImage(html, baseURL);
         console.log('Generated image buffer successfully.');
