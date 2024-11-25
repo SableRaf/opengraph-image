@@ -32,7 +32,7 @@ async function main() {
         const imageBuffer = await imageGenerator.generateImage(html, baseURL);
         console.log('Generated image buffer successfully.');
 
-        const outputPath = path.join(process.cwd(), 'og-image.png');
+        const outputPath = path.join(process.cwd(), '.github/og-image.png');
         fs.writeFileSync(outputPath, imageBuffer);
         console.log(`OG image saved to ${outputPath}`);
     } else {
