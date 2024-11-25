@@ -8,11 +8,14 @@ const ImageGenerator = require('./renderImage');
 
 const argv = yargs(hideBin(process.argv)).options({
     o: { type: 'string', alias: 'owner', default: 'octocat', describe: 'Repository owner' },
-    r: { type: 'string', alias: 'repo', default: 'Hello-World', describe: 'Repository name' }
+    r: { type: 'string', alias: 'repo', default: 'Hello-World', describe: 'Repository name' },
+    h: { type: 'boolean', alias: 'headless', default: true, describe: 'Run in headless mode' }
 }).argv;
 
 const owner = argv.owner;
 const repo = argv.repo;
+const headless = argv.headless;
+const keepOpen = !headless;
 
 async function main() {
     console.log('Starting image generation process...');
@@ -36,7 +39,7 @@ async function main() {
         const imageGenerator = new ImageGenerator(templatesPath);
         const html = imageGenerator.renderTemplate(data, baseURL);
         console.log('Rendered HTML template successfully.');
-        const imageBuffer = await imageGenerator.generateImage(html, baseURL);
+        const imageBuffer = await imageGenerator.generateImage(html, baseURL, headless, keepOpen);
         console.log('Generated image buffer successfully.');
 
         const outputPath = path.join(process.cwd(), '.github/og-image.png');
