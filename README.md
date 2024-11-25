@@ -12,6 +12,7 @@ This tool generates an OG image that displays the repository details and stats. 
 
 - [A framework for building Open Graph images](https://github.blog/open-source/git/framework-building-open-graph-images/)
 - [Custom Open Graph Images for repositories (GitHub Blog)](https://github.blog/news-insights/product-news/custom-open-graph-images-for-repositories/)
+- [Octicons](https://primer.style/foundations/icons) A scalable set of icons handcrafted by GitHub.
 
 ## Similar Projects
 

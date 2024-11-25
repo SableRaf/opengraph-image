@@ -25,8 +25,8 @@ class ImageGenerator {
         const template = fs.readFileSync(templatePath, 'utf8');
         data.background_image = this.getImageDataUrl();
         data.star_icon = this.getIconDataUrl('star');
-        data.fork_icon = this.getIconDataUrl('git-fork');
-        data.contributors_icon = this.getIconDataUrl('group');
+        data.fork_icon = this.getIconDataUrl('repo-forked');
+        data.contributors_icon = this.getIconDataUrl('people');
         return mustache.render(template, data);
     }
 
