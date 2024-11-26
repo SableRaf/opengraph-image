@@ -41,7 +41,7 @@ class ImageGenerator {
 
     async generateImage(html, baseURL, headless = true, keepOpen = false) { // Add keepOpen parameter
         const browser = await puppeteer.launch({
-            defaultViewport: { width: 1200, height: 630, deviceScaleFactor: 1 },
+            defaultViewport: { width: 1280, height: 640, deviceScaleFactor: 1 },
             args: ['--no-sandbox', '--disable-setuid-sandbox', '--allow-file-access-from-files', '--enable-local-file-accesses'],
             headless: headless // Use the headless parameter
         });

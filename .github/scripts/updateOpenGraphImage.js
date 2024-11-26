@@ -6,6 +6,7 @@ const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const GitHubAPI = require('./fetchRepoData');
 const ImageGenerator = require('./renderImage');
+const sharp = require('sharp'); // Add sharp for image compression
 
 const argv = yargs(hideBin(process.argv)).options({
     o: { type: 'string', alias: 'owner', default: 'octocat', describe: 'Repository owner' },
@@ -54,11 +55,19 @@ async function main() {
         const imageGenerator = new ImageGenerator(templatesPath);
         const html = imageGenerator.renderTemplate(data, baseURL);
         console.log('Rendered HTML template successfully.');
-        const imageBuffer = await imageGenerator.generateImage(html, baseURL, headless, keepOpen);
+        const imageBuffer = await imageGenerator.generateImage(html, baseURL, headless, keepOpen, {
+            defaultViewport: { width: 1280, height: 640, deviceScaleFactor: 1 }
+        });
         console.log('Generated image buffer successfully.');
 
+        // Compress the image to ensure it is under 1MB
+        const compressedImageBuffer = await sharp(imageBuffer)
+            .png({ quality: 80, compressionLevel: 9 })
+            .toBuffer();
+        console.log('Compressed image buffer successfully.');
+
         const outputPath = path.join(process.cwd(), '.github/og-image.png');
-        fs.writeFileSync(outputPath, imageBuffer);
+        fs.writeFileSync(outputPath, compressedImageBuffer);
         console.log(`OG image saved to ${outputPath}`);
     } else {
         console.error('Failed to fetch all data.');
