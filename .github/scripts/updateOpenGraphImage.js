@@ -33,6 +33,16 @@ function saveCache(data) {
     fs.writeFileSync(cacheFilePath, JSON.stringify(data, null, 2));
 }
 
+function formatNumber(num) {
+    if (num >= 1000000) {
+        return Math.floor(num / 1000000) + 'M';
+    }
+    if (num >= 1000) {
+        return Math.floor(num / 1000) + 'k';
+    }
+    return num.toString();
+}
+
 async function main() {
     console.log('Starting image generation process...');
     const cache = loadCache();
@@ -80,9 +90,9 @@ async function main() {
             owner: owner, // Add owner field
             repo_name: repo, // Use repo instead of full_name
             description: repoData.description || '',
-            stars: repoData.stargazers_count,
-            forks: repoData.forks_count,
-            contributors: contributorsCount,
+            stars: formatNumber(repoData.stargazers_count), // Use formatted number
+            forks: formatNumber(repoData.forks_count), // Use formatted number
+            contributors: formatNumber(contributorsCount), // Use formatted number
             languages: Object.keys(languages).join(', '), // Convert languages to a comma-separated string
             language_distribution: languageDistribution,
             font_size: `${fontSize}px`,
