@@ -9,7 +9,7 @@ class ImageGenerator {
     }
 
     getImageDataUrl() {
-        const imagePath = path.join(this.templatesPath, 'background-processing.png');
+        const imagePath = path.join(this.templatesPath, 'assets', 'images', 'background-processing.png');
         const imageBuffer = fs.readFileSync(imagePath);
         return `data:image/png;base64,${imageBuffer.toString('base64')}`;
     }
