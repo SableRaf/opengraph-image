@@ -9,15 +9,26 @@ const ImageGenerator = require('./renderImage');
 const sharp = require('sharp'); // Add sharp for image compression
 
 const argv = yargs(hideBin(process.argv)).options({
-    o: { type: 'string', alias: 'owner', default: 'octocat', describe: 'Repository owner' },
-    r: { type: 'string', alias: 'repo', default: 'Hello-World', describe: 'Repository name' },
+    o: { type: 'string', alias: 'owner', describe: 'Repository owner' },
+    r: { type: 'string', alias: 'repo', describe: 'Repository name' },
     h: { type: 'boolean', alias: 'headless', default: true, describe: 'Run in headless mode' }
 }).argv;
 
-const owner = argv.owner;
-const repo = argv.repo;
+let owner = argv.owner;
+let repo = argv.repo;
 const headless = argv.headless;
 const keepOpen = !headless;
+
+if (!owner || !repo) {
+    const [argOwner, argRepo] = argv._[0]?.split('/') || [];
+    if (argOwner && argRepo) {
+        owner = argOwner;
+        repo = argRepo;
+    } else {
+        console.error('Please provide a valid owner and repo.');
+        process.exit(1);
+    }
+}
 
 const cacheFilePath = path.join(process.cwd(), '.github/cache.json');
 
