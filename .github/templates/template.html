@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <style>
@@ -7,12 +8,15 @@
       font-family: 'Mona Sans';
       src: url('{{{font_url}}}') format('woff2');
       font-weight: 100 500;
-      font-stretch: 30% 125%;
-      font-display: swap; 
+      /* font-stretch: 40% 125%; */
+      font-display: swap;
     }
 
     * {
-      font-feature-settings: "ss06" on, "ss05" on;
+      font-feature-settings: 
+        "ss06" on, 
+        "ss05" on, 
+        "ss01" on;
     }
 
     html {
@@ -29,39 +33,50 @@
       display: flex;
       flex-direction: column;
       justify-content: top;
-      padding-top: 88px;
-      padding-left: 88px;
+      padding-top: 103px;
+      padding-left: 87px;
       box-sizing: border-box;
     }
 
     .header {
       display: flex;
-      font-size: 88px;
-      align-items: top;
-      margin-bottom: 20px;
+      flex-wrap: wrap;
+      font-size: calc(81px + (60 - 81) * ((100vw - 300px) / (1600 - 300))); /* Increase minimum font size */
+      margin-bottom: 29px;
+      line-height: 76px; 
+      letter-spacing: 0.007em;
+      width: 812px;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .repo-owner, .repo-separator, .repo-name {
+      overflow-wrap: break-word; /* Allow breaking within long words */
+      word-break: break-word; /* Consider dashes as part of the word */
+      color: #2f363d;
     }
 
     .repo-owner {
       font-weight: normal;
-      margin-right: 10px;
-      color: #2f363d;
     }
 
     .repo-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-weight: bold;
       color: #2f363d;
     }
 
-    .repo-separator {
-      font-weight: normal;
-      color: #2f363d;
-      margin: 0 10px; 
-    }
-
     .description {
-      font-size: 30px;
+      font-size: 34px;
       margin-bottom: 40px;
       color: #6d7581;
+      width: 712px;
     }
 
     .stats {
@@ -91,28 +106,32 @@
 
     .language-bar {
       display: flex;
-      height: 25px; /* Update height to 25px */
+      height: 25px;
+      /* Update height to 25px */
       margin-top: 20px;
       border-radius: 0;
       overflow: hidden;
       width: 100%;
-      min-height: 25px; /* Update min-height to 25px */
+      min-height: 25px;
+      /* Update min-height to 25px */
       position: absolute;
       bottom: 0;
       left: 0;
     }
 
     .language-bar div {
-      height: 25px; /* Update height to 25px */
+      height: 25px;
+      /* Update height to 25px */
       display: block;
     }
   </style>
 </head>
+
 <body>
   <div class="header">
-    <div class="repo-owner">{{owner}}</div> 
-    <div class="repo-separator">/</div> 
-    <div class="repo-name">{{repo_name}}</div> 
+    <span class="repo-owner">{{owner}}</span>
+    <span class="repo-separator">/</span>
+    <span class="repo-name">{{repo_name}}</span>
   </div>
   <div class="description">{{description}}</div>
   <div class="stats">
@@ -131,8 +150,9 @@
   </div>
   <div class="language-bar">
     {{#language_distribution}}
-      <div style="width: {{percentage}}%; background-color: {{color}};" title="{{name}}"></div>
+    <div style="width: {{percentage}}%; background-color: {{color}};" title="{{name}}"></div>
     {{/language_distribution}}
   </div>
 </body>
+
 </html>
