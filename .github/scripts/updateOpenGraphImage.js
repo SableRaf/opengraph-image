@@ -69,6 +69,12 @@ async function main() {
                 color: getColorForLanguage(name) // Function to get color for each language
             };
         });
+
+        const maxFontSize = 84;
+        const minFontSize = 62;
+        const nameLength = `${owner}/${repo}`.length;
+        let fontSize = maxFontSize - (nameLength - 20) * 1.5;
+        fontSize = Math.max(minFontSize, Math.min(maxFontSize, fontSize));
         
         const data = {
             owner: owner, // Add owner field
@@ -78,7 +84,8 @@ async function main() {
             forks: repoData.forks_count,
             contributors: contributorsCount,
             languages: Object.keys(languages).join(', '), // Convert languages to a comma-separated string
-            language_distribution: languageDistribution
+            language_distribution: languageDistribution,
+            font_size: `${fontSize}px`
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');
