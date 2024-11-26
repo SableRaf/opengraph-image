@@ -85,7 +85,8 @@ async function main() {
             contributors: contributorsCount,
             languages: Object.keys(languages).join(', '), // Convert languages to a comma-separated string
             language_distribution: languageDistribution,
-            font_size: `${fontSize}px`
+            font_size: `${fontSize}px`,
+            profile_picture_url: repoData.owner.avatar_url // Add profile picture URL
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');

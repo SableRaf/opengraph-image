@@ -37,6 +37,7 @@ class ImageGenerator {
         data.font_url = this.getFontDataUrl();
         data.baseURL = baseURL;
         data.language_distribution = data.language_distribution || [];
+        data.profile_picture = data.profile_picture_url; // Add profile picture URL
         return mustache.render(template, data);
     }
 

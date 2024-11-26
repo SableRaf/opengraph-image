@@ -2,8 +2,8 @@
 -[x] Use 1280 by 640 px for the og image
 -[x] Make sure the output image is under 1MB
 -[x] Add the visualization of the languages used
+-[x] Include the PFP of the repo owner
 -[] Replicate the layout of the original
--[] Include the PFP of the repo owner
 -[] Use shorthand for large numbers (10k, 20k etc.)
 -[] Make all the stats in a single row
 -[] Make all the stats optional (skip if the count is zero)

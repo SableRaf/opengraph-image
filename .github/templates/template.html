@@ -138,10 +138,29 @@
       /* Update height to 25px */
       display: block;
     }
+
+    .profile-picture {
+      position: absolute;
+      top: 87px;
+      right: 87px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .profile-picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 
 <body>
+  <div class="profile-picture">
+    <img src="{{{profile_picture}}}" alt="Profile Picture">
+  </div>
   <div class="header">
     <span class="repo-owner">{{owner}}</span>
     <span class="repo-separator">/</span>
