@@ -5,7 +5,7 @@
   <style>
     @font-face {
       font-family: 'Mona Sans';
-      src: url('{{{font_url}}}') format('woff2'); // Ensure correct usage of data URL
+      src: url('{{{font_url}}}') format('woff2');
       font-weight: 100 500;
       font-stretch: 30% 125%;
       font-display: swap; 
@@ -23,46 +23,72 @@
       width: 1280px;
       height: 640px;
       margin: 0;
-      background-image: url('{{{background_image}}}');
+      /* background-image: url('{{{background_image}}}'); */
       background-size: cover;
       color: #ffffff;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 50px;
+      justify-content: top;
+      padding-top: 88px;
+      padding-left: 88px;
       box-sizing: border-box;
     }
 
-
-    .repo-name {
-      font-size: 60px;
-      font-weight: bold;
+    .header {
+      display: flex;
+      font-size: 100px;
+      align-items: top;
       margin-bottom: 20px;
     }
-    .description {
-      font-size: 40px;
-      margin-bottom: 40px;
+
+    .repo-owner {
+      font-weight: normal;
+      margin-right: 10px;
+      color: #2f363d;
     }
+
+    .repo-name {
+      font-weight: bold;
+      color: #2f363d;
+    }
+
+    .repo-separator {
+      font-weight: normal;
+      color: #6d7581;
+      margin: 0 10px; /* Add some space around the separator */
+    }
+
+    .description {
+      font-size: 30px;
+      margin-bottom: 40px;
+      color: #6d7581;
+    }
+
     .stats {
       font-size: 30px;
       display: flex;
       flex-direction: column;
+      color: #6d7581;
     }
+
     .stats div {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
     }
+
     .stats img {
       margin-right: 10px;
       width: 24px;
       height: 24px;
       filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
     }
+
     .languages {
       font-size: 30px;
       margin-top: 20px;
     }
+
     .language-bar {
       display: flex;
       height: 25px; /* Update height to 25px */
@@ -75,6 +101,7 @@
       bottom: 0;
       left: 0;
     }
+
     .language-bar div {
       height: 25px; /* Update height to 25px */
       display: block;
@@ -82,7 +109,11 @@
   </style>
 </head>
 <body>
-  <div class="repo-name">{{full_name}}</div>
+  <div class="header">
+    <div class="repo-owner">{{owner}}</div> 
+    <div class="repo-separator">/</div> 
+    <div class="repo-name">{{repo_name}}</div> 
+  </div>
   <div class="description">{{description}}</div>
   <div class="stats">
     <div>

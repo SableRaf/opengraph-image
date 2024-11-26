@@ -42,7 +42,8 @@ async function main() {
         });
         
         const data = {
-            full_name: repoData.full_name,
+            owner: owner, // Add owner field
+            repo_name: repo, // Use repo instead of full_name
             description: repoData.description || '',
             stars: repoData.stargazers_count,
             forks: repoData.forks_count,
