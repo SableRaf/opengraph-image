@@ -99,7 +99,7 @@
       flex-direction: row;
       font-size: 30px;
       color: #6d7581;
-      gap: 20px;
+      gap: 50px;
       position: absolute;
       bottom: 80px; 
       left: 87px;
@@ -107,23 +107,39 @@
 
     .stats div {
       display: flex;
-      align-items: center;
-      text-align: center;
+      align-items: flex-start;
+      text-align: left;
     }
 
-    .stats img {
-      margin-right: 10px;
+    .stat {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .stat img {
       width: 32px;
       height: 32px;
+      margin-top: 5px;
+      margin-right: 1px;
+    }
+
+    .stat-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0px;
     }
 
     .stat-number {
-      font-weight: bold;
-      margin-right: 5px;
+      font-size: 32px;
+      font-weight: 450;
+      align-self: flex-start;
+      color:#2f363d;
     }
 
     .stat-name {
-      font-size: 20px;
+      font-size: 27px;
     }
 
     .languages {
@@ -179,45 +195,45 @@
   <div class="description">{{description}}</div>
   <div class="stats">
     {{#stars}}
-    <div>
+    <div class="stat">
       <img src="{{{star_icon}}}" alt="Stars">
-      <div>
+      <div class="stat-info">
         <div class="stat-number">{{stars}}</div>
         <div class="stat-name">Stars</div>
       </div>
     </div>
     {{/stars}}
     {{#forks}}
-    <div>
+    <div class="stat">
       <img src="{{{fork_icon}}}" alt="Forks">
-      <div>
+      <div class="stat-info">
         <div class="stat-number">{{forks}}</div>
         <div class="stat-name">Forks</div>
       </div>
     </div>
     {{/forks}}
     {{#contributors}}
-    <div>
+    <div class="stat">
       <img src="{{{contributors_icon}}}" alt="Contributors">
-      <div>
+      <div class="stat-info">
         <div class="stat-number">{{contributors}}</div>
         <div class="stat-name">Contributors</div>
       </div>
     </div>
     {{/contributors}}
     {{#issues}}
-    <div>
+    <div class="stat">
       <img src="{{{issue_icon}}}" alt="Issues">
-      <div>
+      <div class="stat-info">
         <div class="stat-number">{{issues}}</div>
         <div class="stat-name">Issues</div>
       </div>
     </div>
     {{/issues}}
     {{#discussions}}
-    <div>
+    <div class="stat">
       <img src="{{{discussion_icon}}}" alt="Discussions">
-      <div>
+      <div class="stat-info">
         <div class="stat-number">{{discussions}}</div>
         <div class="stat-name">Discussions</div>
       </div>
