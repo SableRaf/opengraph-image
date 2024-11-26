@@ -19,12 +19,41 @@ const repo = argv.repo;
 const headless = argv.headless;
 const keepOpen = !headless;
 
+const cacheFilePath = path.join(process.cwd(), '.github/cache.json');
+
+function loadCache() {
+    if (fs.existsSync(cacheFilePath)) {
+        const cacheContent = fs.readFileSync(cacheFilePath, 'utf8');
+        return JSON.parse(cacheContent);
+    }
+    return {};
+}
+
+function saveCache(data) {
+    fs.writeFileSync(cacheFilePath, JSON.stringify(data, null, 2));
+}
+
 async function main() {
     console.log('Starting image generation process...');
+    const cache = loadCache();
     const api = new GitHubAPI(owner, repo, process.env.GITHUB_TOKEN);
-    const repoData = await api.fetchRepoData();
-    const contributorsCount = await api.fetchContributorsCount();
-    const languages = await api.fetchLanguages();
+
+    let repoData = cache.repoData;
+    let contributorsCount = cache.contributorsCount;
+    let languages = cache.languages;
+
+    if (!repoData || !contributorsCount || !languages) {
+        repoData = await api.fetchRepoData();
+        contributorsCount = await api.fetchContributorsCount();
+        languages = await api.fetchLanguages();
+
+        cache.repoData = repoData;
+        cache.contributorsCount = contributorsCount;
+        cache.languages = languages;
+        saveCache(cache);
+    } else {
+        console.log('Loaded data from cache.');
+    }
 
     if (repoData && contributorsCount !== undefined && languages) {
         console.log('Fetched repository data, contributors count, and languages successfully.');
