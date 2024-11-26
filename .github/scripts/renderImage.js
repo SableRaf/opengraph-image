@@ -14,10 +14,11 @@ class ImageGenerator {
         return `data:image/png;base64,${imageBuffer.toString('base64')}`;
     }
 
-    getIconDataUrl(iconName) {
+    getIconDataUrl(iconName, color = '#6E7681') {
         const iconPath = path.join(this.templatesPath, 'assets', 'icons', `${iconName}.svg`);
-        const iconBuffer = fs.readFileSync(iconPath);
-        return `data:image/svg+xml;base64,${iconBuffer.toString('base64')}`;
+        let iconContent = fs.readFileSync(iconPath, 'utf8');
+        iconContent = iconContent.replace(/<path/g, `<path fill="${color}"`);
+        return `data:image/svg+xml;base64,${Buffer.from(iconContent).toString('base64')}`;
     }
 
     getFontDataUrl() {
@@ -30,9 +31,9 @@ class ImageGenerator {
         const templatePath = path.join(this.templatesPath, 'template.html');
         const template = fs.readFileSync(templatePath, 'utf8');
         data.background_image = this.getImageDataUrl();
-        data.star_icon = this.getIconDataUrl('star');
-        data.fork_icon = this.getIconDataUrl('repo-forked');
-        data.contributors_icon = this.getIconDataUrl('people');
+        data.star_icon = this.getIconDataUrl('star', '#6E7681');
+        data.fork_icon = this.getIconDataUrl('repo-forked', '#6E7681'); 
+        data.contributors_icon = this.getIconDataUrl('people', '#6E7681');
         data.font_url = this.getFontDataUrl();
         data.baseURL = baseURL;
         data.language_distribution = data.language_distribution || [];
