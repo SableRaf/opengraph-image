@@ -28,17 +28,19 @@ async function main() {
 
     if (repoData && contributorsCount !== undefined && languages) {
         console.log('Fetched repository data, contributors count, and languages successfully.');
+        if (Object.keys(languages).length === 0) {
+            console.warn('No languages found for this repository. Skipping language distribution.');
+        }
         const totalBytes = Object.values(languages).reduce((acc, bytes) => acc + bytes, 0);
         const languageDistribution = Object.entries(languages).map(([name, bytes]) => {
             const percentage = ((bytes / totalBytes) * 100).toFixed(2);
-            console.log(`Language: ${name}, Percentage: ${percentage}%`);
             return {
                 name,
                 percentage,
                 color: getColorForLanguage(name) // Function to get color for each language
             };
         });
-
+        
         const data = {
             full_name: repoData.full_name,
             description: repoData.description || '',

@@ -55,8 +55,13 @@ class GitHubAPI {
             if (!response.ok) {
                 throw new Error(`GitHub API responded with status ${response.status}`);
             }
-            console.log('Languages fetched successfully.');
-            return await response.json();
+            const languages = await response.json();
+            if (Object.keys(languages).length === 0) {
+                console.warn('No languages found for this repository.');
+            } else {
+                console.log('Languages fetched successfully:', languages); 
+            }
+            return languages;
         } catch (error) {
             console.error('Error fetching languages:', error);
         }
