@@ -1,4 +1,7 @@
 -[x] Use the right font
+-[x] Use 1280 by 640 px for the og image
+-[x] Make sure the output image is under 1MB
+-[] Use shorthand for large numbers (10k, 20k etc.)
 -[] Add the visualization of the languages used
 -[] Include the PFP of the repo owner
 -[] Replicate the layout of the original
