@@ -27,7 +27,7 @@
       width: 1280px;
       height: 640px;
       margin: 0;
-      /* background-image: url('{{{background_image}}}'); */
+      background-image: url('{{{background_image}}}');
       background-size: cover;
       color: #ffffff;
       display: flex;
@@ -62,20 +62,20 @@
 
     .repo-owner {
       font-weight: normal;
-      color: #2f363d;
+      color: #f7f7f8;
     }
 
     .repo-separator {
       font-weight: normal;
       margin-left: -0.1em;
       margin-right: -0.1em;
-      color: #2f363d;
+      color: #f7f7f8;
     }
 
     .repo-name {
       text-overflow: ellipsis;
       font-weight: bold;
-      color: #2f363d;
+      color: #f7f7f8;
     }
 
     .description {
@@ -84,12 +84,12 @@
       font-size: 34px;
       line-height: 47px;
       max-width: 813px;
-      color: #6d7581;
+      color: #afbac5;
       max-width: 813px;
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      line-clamp: 4;
+      line-clamp: 3;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -98,7 +98,7 @@
       display: flex;
       flex-direction: row;
       font-size: 30px;
-      color: #6d7581;
+      color: #f7f7f8;
       gap: 50px;
       position: absolute;
       bottom: 80px; 
@@ -135,11 +135,12 @@
       font-size: 32px;
       font-weight: 450;
       align-self: flex-start;
-      color:#2f363d;
+      color:#f7f7f8;
     }
 
     .stat-name {
       font-size: 27px;
+      color: #afbac5;
     }
 
     .languages {
@@ -184,15 +185,22 @@
 </head>
 
 <body>
+  {{#config.ownerLogo}}
   <div class="profile-picture">
     <img src="{{{profile_picture}}}" alt="Profile Picture">
   </div>
+  {{/config.ownerLogo}}
+  {{#config.nameWithOwner}}
   <div class="header">
     <span class="repo-owner">{{owner}}</span>
     <span class="repo-separator">/</span>
     <span class="repo-name">{{repo_name}}</span>
   </div>
+  {{/config.nameWithOwner}}
+  {{#config.description}}
   <div class="description">{{description}}</div>
+  {{/config.description}}
+  {{#config.stats}}
   <div class="stats">
     {{#stars}}
     <div class="stat">
@@ -240,11 +248,14 @@
     </div>
     {{/discussions}}
   </div>
+  {{/config.stats}}
+  {{#config.linguist}}
   <div class="language-bar">
     {{#language_distribution}}
     <div style="width: {{percentage}}%; background-color: {{color}};" title="{{name}}"></div>
     {{/language_distribution}}
   </div>
+  {{/config.linguist}}
 </body>
 
 </html>

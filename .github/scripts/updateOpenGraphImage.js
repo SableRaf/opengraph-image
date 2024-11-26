@@ -35,12 +35,17 @@ const cacheFilePath = path.join(process.cwd(), '.github/cache.json');
 function loadCache() {
     if (fs.existsSync(cacheFilePath)) {
         const cacheContent = fs.readFileSync(cacheFilePath, 'utf8');
-        return JSON.parse(cacheContent);
+        const cache = JSON.parse(cacheContent);
+        if (cache.owner === owner && cache.repo === repo) {
+            return cache;
+        }
     }
     return {};
 }
 
 function saveCache(data) {
+    data.owner = owner;
+    data.repo = repo;
     fs.writeFileSync(cacheFilePath, JSON.stringify(data, null, 2));
 }
 
@@ -53,6 +58,8 @@ function formatNumber(num) {
     }
     return num.toString();
 }
+
+const config = require('../config.json');
 
 async function main() {
     console.log('Starting image generation process...');
@@ -109,7 +116,8 @@ async function main() {
             languages: Object.keys(languages).join(', '),
             language_distribution: languageDistribution,
             font_size: `${fontSize}px`,
-            profile_picture_url: repoData.owner.avatar_url
+            profile_picture_url: repoData.owner.avatar_url,
+            config: config.elements // Pass configuration to the template
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');

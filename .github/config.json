@@ -1,0 +1,10 @@
+
+{
+  "elements": {
+    "nameWithOwner": true,
+    "description": true,
+    "ownerLogo": false,
+    "stats": true,
+    "linguist": true
+  }
+}

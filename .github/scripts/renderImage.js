@@ -9,7 +9,7 @@ class ImageGenerator {
     }
 
     getImageDataUrl() {
-        const imagePath = path.join(this.templatesPath, 'reference.png');
+        const imagePath = path.join(this.templatesPath, 'background-processing.png');
         const imageBuffer = fs.readFileSync(imagePath);
         return `data:image/png;base64,${imageBuffer.toString('base64')}`;
     }
@@ -30,12 +30,13 @@ class ImageGenerator {
     renderTemplate(data, baseURL) {
         const templatePath = path.join(this.templatesPath, 'template.html');
         const template = fs.readFileSync(templatePath, 'utf8');
+        const iconColor = '#f7f7f8';
         data.background_image = this.getImageDataUrl();
-        data.star_icon = this.getIconDataUrl('star', '#6E7681');
-        data.fork_icon = this.getIconDataUrl('repo-forked', '#6E7681'); 
-        data.contributors_icon = this.getIconDataUrl('people', '#6E7681');
-        data.issue_icon = this.getIconDataUrl('issue-opened', '#6E7681'); // Add issue icon
-        data.discussion_icon = this.getIconDataUrl('comment-discussion', '#6E7681'); // Add discussion icon
+        data.star_icon = this.getIconDataUrl('star', iconColor);
+        data.fork_icon = this.getIconDataUrl('repo-forked', iconColor); 
+        data.contributors_icon = this.getIconDataUrl('people', iconColor);
+        data.issue_icon = this.getIconDataUrl('issue-opened', iconColor); // Add issue icon
+        data.discussion_icon = this.getIconDataUrl('comment-discussion', iconColor); // Add discussion icon
         data.font_url = this.getFontDataUrl();
         data.baseURL = baseURL;
         data.language_distribution = data.language_distribution || [];
