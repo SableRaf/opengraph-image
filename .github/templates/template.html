@@ -96,21 +96,31 @@
 
     .stats {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       font-size: 30px;
       color: #6d7581;
+      gap: 20px; /* Add gap between stats */
     }
 
     .stats div {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      margin-bottom: 10px;
+      text-align: center;
     }
 
     .stats img {
-      margin-right: 10px;
+      margin-bottom: 5px;
       width: 24px;
       height: 24px;
+    }
+
+    .stat-number {
+      font-weight: bold;
+    }
+
+    .stat-name {
+      font-size: 20px;
     }
 
     .languages {
@@ -168,18 +178,41 @@
   </div>
   <div class="description">{{description}}</div>
   <div class="stats">
+    {{#stars}}
     <div>
       <img src="{{{star_icon}}}" alt="Stars">
-      Stars: {{stars}}
+      <div class="stat-number">{{stars}}</div>
+      <div class="stat-name">Stars</div>
     </div>
+    {{/stars}}
+    {{#forks}}
     <div>
       <img src="{{{fork_icon}}}" alt="Forks">
-      Forks: {{forks}}
+      <div class="stat-number">{{forks}}</div>
+      <div class="stat-name">Forks</div>
     </div>
+    {{/forks}}
+    {{#contributors}}
     <div>
       <img src="{{{contributors_icon}}}" alt="Contributors">
-      Contributors: {{contributors}}
+      <div class="stat-number">{{contributors}}</div>
+      <div class="stat-name">Contributors</div>
     </div>
+    {{/contributors}}
+    {{#issues}}
+    <div>
+      <img src="{{{issue_icon}}}" alt="Issues">
+      <div class="stat-number">{{issues}}</div>
+      <div class="stat-name">Issues</div>
+    </div>
+    {{/issues}}
+    {{#discussions}}
+    <div>
+      <img src="{{{discussion_icon}}}" alt="Discussions">
+      <div class="stat-number">{{discussions}}</div>
+      <div class="stat-name">Discussions</div>
+    </div>
+    {{/discussions}}
   </div>
   <div class="language-bar">
     {{#language_distribution}}

@@ -16,8 +16,16 @@ class GitHubAPI {
             if (!response.ok) {
                 throw new Error(`GitHub API responded with status ${response.status}`);
             }
+            const repoData = await response.json();
+            const discussionsResponse = await fetch(`${this.apiUrl}/discussions`, { headers: this.headers });
+            if (discussionsResponse.ok) {
+                const discussionsData = await discussionsResponse.json();
+                repoData.discussions_count = discussionsData.total_count;
+            } else {
+                repoData.discussions_count = 0;
+            }
             console.log('Repository data fetched successfully.');
-            return await response.json();
+            return repoData;
         } catch (error) {
             console.error('Error fetching repository data:', error);
         }

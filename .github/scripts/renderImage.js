@@ -34,6 +34,8 @@ class ImageGenerator {
         data.star_icon = this.getIconDataUrl('star', '#6E7681');
         data.fork_icon = this.getIconDataUrl('repo-forked', '#6E7681'); 
         data.contributors_icon = this.getIconDataUrl('people', '#6E7681');
+        data.issue_icon = this.getIconDataUrl('issue-opened', '#6E7681'); // Add issue icon
+        data.discussion_icon = this.getIconDataUrl('comment-discussion', '#6E7681'); // Add discussion icon
         data.font_url = this.getFontDataUrl();
         data.baseURL = baseURL;
         data.language_distribution = data.language_distribution || [];

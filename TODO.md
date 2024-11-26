@@ -3,12 +3,12 @@
 -[x] Make sure the output image is under 1MB
 -[x] Add the visualization of the languages used
 -[x] Include the PFP of the repo owner
+-[x] Use shorthand for large numbers (10k, 20k etc.)
+-[x] Include issue count
+-[x] Include discussion count
 -[] Replicate the layout of the original
--[] Use shorthand for large numbers (10k, 20k etc.)
 -[] Make all the stats in a single row
 -[] Make all the stats optional (skip if the count is zero)
 -[] Implement GitHub Action to generate the og image
 -[] Properly handle long repo names (with ellipsis)
 -[] Add instructions to set the og image in the repo settings
--[] Include issue count
--[] Include discussion count

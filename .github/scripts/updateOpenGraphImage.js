@@ -87,16 +87,18 @@ async function main() {
         fontSize = Math.max(minFontSize, Math.min(maxFontSize, fontSize));
         
         const data = {
-            owner: owner, // Add owner field
-            repo_name: repo, // Use repo instead of full_name
+            owner: owner,
+            repo_name: repo,
             description: repoData.description || '',
-            stars: formatNumber(repoData.stargazers_count), // Use formatted number
-            forks: formatNumber(repoData.forks_count), // Use formatted number
-            contributors: formatNumber(contributorsCount), // Use formatted number
-            languages: Object.keys(languages).join(', '), // Convert languages to a comma-separated string
+            stars: repoData.stargazers_count > 0 ? formatNumber(repoData.stargazers_count) : null, // Use formatted number
+            forks: repoData.forks_count > 0 ? formatNumber(repoData.forks_count) : null, // Use formatted number
+            contributors: contributorsCount > 0 ? formatNumber(contributorsCount) : null, // Use formatted number
+            issues: repoData.open_issues_count > 0 ? formatNumber(repoData.open_issues_count) : null, // Use formatted number
+            discussions: repoData.discussions_count > 0 ? formatNumber(repoData.discussions_count) : null, // Use formatted number
+            languages: Object.keys(languages).join(', '),
             language_distribution: languageDistribution,
             font_size: `${fontSize}px`,
-            profile_picture_url: repoData.owner.avatar_url // Add profile picture URL
+            profile_picture_url: repoData.owner.avatar_url
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');
