@@ -7,9 +7,11 @@
 -[x] Include issue count
 -[x] Include discussion count
 -[x] Make all the stats in a single row
--[] Replicate the layout of the original
--[] Make all the stats optional (skip if the count is zero)
--[] Implement GitHub Action to generate the og image
+-[x] Replicate the layout of the original
+-[x] Make all the stats optional (skip if the count is zero)
+-[x] Implement GitHub Action to generate the og image
+-[] Run the action once a day at midnight UTC
+-[] Publish the action to GitHub Marketplace
 -[] Properly handle long repo names (with ellipsis)
 -[] Add instructions to set the og image in the repo settings
 -[] Find out the logic on what stats to include and in which order
