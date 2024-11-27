@@ -18,36 +18,57 @@ async function updateSocialPreview() {
         process.exit(1);
     }
 
+    console.log(`Repository owner: ${owner}`);
+    console.log(`Repository name: ${repo}`);
+
     const browser = await puppeteer.launch({
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
         headless: true
     });
 
+    console.log('Browser launched.');
+
     const page = await browser.newPage();
+    console.log('New page opened.');
+
     await page.goto(`https://github.com/login`);
+    console.log('Navigated to GitHub login page.');
 
     // Log in to GitHub
     await page.type('#login_field', String(process.env.BOT_GITHUB_USERNAME));
     await page.type('#password', String(process.env.BOT_GITHUB_PASSWORD));
     await page.click('[name="commit"]');
+    console.log('Login form submitted.');
+
     await page.waitForNavigation();
+    console.log('Logged in to GitHub.');
 
     // Navigate to the social preview section
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
+    console.log(`Navigated to settings page of ${owner}/${repo}.`);
+
     await page.waitForSelector('#edit-social-preview-button');
+    console.log('Social preview edit button found.');
 
     // Click the "Edit" button
     await page.click('#edit-social-preview-button');
+    console.log('Clicked the edit button.');
+
     await page.waitForSelector('label[for="repo-image-file-input"]');
+    console.log('Image file input found.');
 
     // Upload the new social preview image
     const input = await page.$('input[name="repository[social_preview]"]');
     await input.uploadFile('.github/og-image.png');
+    console.log('Uploaded new social preview image.');
+
     await page.click('button[name="button"]');
+    console.log('Save button clicked.');
 
     console.log('Social preview image updated successfully.');
 
     await browser.close();
+    console.log('Browser closed.');
 }
 
 updateSocialPreview();
