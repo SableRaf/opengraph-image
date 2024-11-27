@@ -36,6 +36,10 @@ async function updateSocialPreview() {
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
     await page.waitForSelector('#repository_social_preview');
 
+    // Click the "Edit" button
+    await page.click('#edit-social-preview-button');
+    await page.waitForSelector('label[for="repo-image-file-input"]');
+
     // Upload the new social preview image
     const input = await page.$('input[name="repository[social_preview]"]');
     await input.uploadFile('.github/og-image.png');
