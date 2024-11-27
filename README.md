@@ -6,24 +6,28 @@ This tool generates an OG image that displays the repository details and stats. 
 
 ## Usage
 
-Navigate to the `.github/scripts` directory and run the following command:
-
-```
-node updateOpenGraphImage.js repoOwner/repoName
-```
-
-This will generate a new image `og-image.png` in the `.github` directory.
-
 ### Configuration
 
-Edit `config.yml` to configure the image generation parameters. You can set the source repository and define the elements to be included in the image.
+Edit `config.yml` to configure the image generation parameters. You can set the source repository and define the elements to be included in the image. Refer to the comments in the file for guidance.
 
-Refer to the comments in the file for guidance.
+### Local Setup
+
+Create a new GitHub token [here](https://github.com/settings/tokens) with read_repo permissions and add it to the `.env` file.
+
+Create a `.env` file in the root directory containing the following:
+```
+GITHUB_TOKEN=<your github token>
+```
+Use the actual GitHub token instead of `<your github token>`.
+
+> [!WARNING]
+> Make sure to add `.env` to your `.gitignore` file to avoid accidentally committing your token to the repository.
 
 ### Local Usage
 
 1. run `npm install` to install the dependencies.
 2. run `npm run generate` to generate the image.
+
 
 ### GitHub Actions Configuration
 
