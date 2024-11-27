@@ -10,8 +10,9 @@
 -[x] Replicate the layout of the original
 -[x] Make all the stats optional (skip if the count is zero)
 -[x] Implement GitHub Action to generate the og image
--[] Run the action once a day at midnight UTC
--[] Publish the action to GitHub Marketplace
+-[x] Run the action once a day at midnight UTC
+-[] Publish the action to GitHub Marketplace (https://docs.github.com/en/actions/sharing-automations/creating-actions/publishing-actions-in-github-marketplace)
+-[] Update the Social Preview using Puppeteer (the GitHub API doesn't support this yet)
 -[] Properly handle long repo names (with ellipsis)
 -[] Add instructions to set the og image in the repo settings
 -[] Find out the logic on what stats to include and in which order

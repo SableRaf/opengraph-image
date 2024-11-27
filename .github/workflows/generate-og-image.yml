@@ -31,6 +31,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/updateOpenGraphImage.js --owner ${{ github.repository_owner }} --repo ${{ github.event.repository.name }}
 
+      - name: Update Social Preview
+        run: node .github/scripts/updateSocialPreview.js --owner ${{ github.repository_owner }} --repo ${{ github.event.repository.name }}
+
       - name: Commit and push OG image
         run: |
           git config --global user.name 'github-actions[bot]'
