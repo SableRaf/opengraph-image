@@ -1,8 +1,12 @@
 # Repo OpenGraph Image Generator
 
-By default, GitHub creates an OpenGraph image for your repository that includes information about your repository. You can also customize this by providing a custom image. However, a static image will not include dynamic information about your repository.
+![Repo OpenGraph Image](example-og-image.png)
 
-This tool generates an OG image that displays the repository details and stats. The method is inspired by [this post](https://github.blog/open-source/git/framework-building-open-graph-images/) on the GitHub blog.
+This npm tool generates a custom [OpenGraph](https://www.opengraph.xyz/) image that displays the repository details and stats. Your can choose what elements are included in the image and even use a custom background.
+
+The image is generated using [puppeteer](https://github.com/GoogleChrome/puppeteer) and [sharp](https://github.com/lovell/sharp).
+
+The method is inspired by [this post](https://github.blog/open-source/git/framework-building-open-graph-images/) on the GitHub blog.
 
 ## Usage
 
