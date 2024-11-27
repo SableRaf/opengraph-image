@@ -2,9 +2,7 @@ This node.js tool generates a custom [OpenGraph](https://www.opengraph.xyz/) ima
 
 ![Repo OpenGraph Image](example-og-image.png)
 
-The image is generated using [puppeteer](https://github.com/GoogleChrome/puppeteer) and [sharp](https://github.com/lovell/sharp).
-
-The method is inspired by [this post](https://github.blog/open-source/git/framework-building-open-graph-images/) on the GitHub blog.
+The image is generated using [puppeteer](https://github.com/GoogleChrome/puppeteer) and [sharp](https://github.com/lovell/sharp). The method is inspired by [this post](https://github.blog/open-source/git/framework-building-open-graph-images/) on the GitHub blog.
 
 ## Usage
 
