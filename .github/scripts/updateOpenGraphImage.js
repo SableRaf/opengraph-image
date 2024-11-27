@@ -131,10 +131,11 @@ async function main() {
             font_size: `${fontSize}px`,
             profile_picture_url: repoData.owner.avatar_url,
             config: config.elements, // Pass configuration to the template
-            background_image: config.backgroundImage
+            background_image: config.backgroundImage,
+            template_path: config.templatePath // Add this line to pass template path from config
         };
 
-        const templatesPath = path.join(__dirname, '..', 'templates');
+        const templatesPath = path.join(__dirname, '../templates'); 
         const baseURL = path.resolve(templatesPath).replace(/\\/g, '/');
         
         const imageGenerator = new ImageGenerator(templatesPath);

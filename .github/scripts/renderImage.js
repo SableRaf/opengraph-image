@@ -28,7 +28,7 @@ class ImageGenerator {
     }
 
     renderTemplate(data, baseURL) {
-        const templatePath = path.join(this.templatesPath, 'template.html');
+        const templatePath = path.join(baseURL, data.template_path);
         const template = fs.readFileSync(templatePath, 'utf8');
         const iconColor = '#f7f7f8';
         data.background_image = this.getImageDataUrl(data.background_image);
