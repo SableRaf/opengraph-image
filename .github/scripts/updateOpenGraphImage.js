@@ -6,7 +6,8 @@ const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const GitHubAPI = require('./fetchRepoData');
 const ImageGenerator = require('./renderImage');
-const sharp = require('sharp'); // Add sharp for image compression
+const sharp = require('sharp'); 
+const readline = require('readline');
 
 const argv = yargs(hideBin(process.argv)).options({
     o: { type: 'string', alias: 'owner', describe: 'Repository owner' },
@@ -19,15 +20,16 @@ let repo = argv.repo;
 const headless = argv.headless;
 const keepOpen = !headless;
 
-if (!owner || !repo) {
-    const [argOwner, argRepo] = argv._[0]?.split('/') || [];
-    if (argOwner && argRepo) {
-        owner = argOwner;
-        repo = argRepo;
-    } else {
-        console.error('Please provide a valid owner and repo.');
-        process.exit(1);
-    }
+function askQuestion(query) {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    return new Promise(resolve => rl.question(query, answer => {
+        rl.close();
+        resolve(answer);
+    }));
 }
 
 const cacheFilePath = path.join(process.cwd(), '.github/cache.json');
@@ -63,6 +65,16 @@ const config = require('../config.json');
 
 async function main() {
     console.log('Starting image generation process...');
+    if (!owner || !repo) {
+        const [argOwner, argRepo] = argv._[0]?.split('/') || [];
+        if (argOwner && argRepo) {
+            owner = argOwner;
+            repo = argRepo;
+        } else {
+            owner = await askQuestion('Please provide the repository owner: ');
+            repo = await askQuestion('Please provide the repository name: ');
+        }
+    }
     const cache = loadCache();
     const api = new GitHubAPI(owner, repo, process.env.GITHUB_TOKEN);
 
