@@ -34,7 +34,7 @@ async function updateSocialPreview() {
 
     // Navigate to the social preview section
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
-    await page.waitForSelector('#repository_social_preview');
+    await page.waitForSelector('#edit-social-preview-button');
 
     // Click the "Edit" button
     await page.click('#edit-social-preview-button');
