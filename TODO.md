@@ -13,3 +13,4 @@
 -[] Properly handle long repo names (with ellipsis)
 -[] Add instructions to set the og image in the repo settings
 -[] Find out the logic on what stats to include and in which order
+-[] Adjust plural forms of words (e.g. issue, issues, fork, forks, etc.)
