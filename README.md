@@ -1,8 +1,6 @@
-# Repo OpenGraph Image Generator
+This node.js tool generates a custom [OpenGraph](https://www.opengraph.xyz/) image that displays the repository details and stats. Your can choose what elements are included in the image and even use a custom background.
 
 ![Repo OpenGraph Image](example-og-image.png)
-
-This npm tool generates a custom [OpenGraph](https://www.opengraph.xyz/) image that displays the repository details and stats. Your can choose what elements are included in the image and even use a custom background.
 
 The image is generated using [puppeteer](https://github.com/GoogleChrome/puppeteer) and [sharp](https://github.com/lovell/sharp).
 
