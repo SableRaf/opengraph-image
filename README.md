@@ -34,7 +34,10 @@ If you know html/css and want to use a custom template, you can edit `template.h
 
 ### GitHub Actions Configuration
 
-[TBD]
+1. Set GITHUB_TOKEN Permissions:
+- Go to repository `Settings → Actions → General → Workflow permissions`.
+- Enable: Read and write permissions.
+- Click `Save`.
 
 ## References
 
