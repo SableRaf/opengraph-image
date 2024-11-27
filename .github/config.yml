@@ -1,0 +1,19 @@
+
+# Location and name of the output image relative to the root of the repository
+outputPath: ".github/og-image.png" 
+
+# Location and name of the background image relative to the location of the template.html file
+backgroundImage: "assets/images/background-processing.png"
+
+# The following are optional, and will be used to generate the image.
+repo:
+  owner: "octocat" # The owner of the repository (usually your Github username)
+  name: "hello-world" # The name of the repository.
+
+# Which elements should be included in the image?
+elements:
+  nameWithOwner: true
+  description: true
+  ownerLogo: false
+  stats: true
+  linguist: true

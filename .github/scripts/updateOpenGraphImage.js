@@ -15,8 +15,11 @@ const argv = yargs(hideBin(process.argv)).options({
     h: { type: 'boolean', alias: 'headless', default: true, describe: 'Run in headless mode' }
 }).argv;
 
-let owner = argv.owner;
-let repo = argv.repo;
+const configPath = path.join(__dirname, '../config.yml');
+const config = yaml.load(fs.readFileSync(configPath, 'utf8'));
+
+let owner = argv.owner || config.repo.owner;
+let repo = argv.repo || config.repo.name;
 const headless = argv.headless;
 const keepOpen = !headless;
 
@@ -60,8 +63,6 @@ function formatNumber(num) {
     }
     return num.toString();
 }
-
-const config = require('../config.json');
 
 async function main() {
     console.log('Starting image generation process...');
@@ -129,7 +130,8 @@ async function main() {
             language_distribution: languageDistribution,
             font_size: `${fontSize}px`,
             profile_picture_url: repoData.owner.avatar_url,
-            config: config.elements // Pass configuration to the template
+            config: config.elements, // Pass configuration to the template
+            background_image: config.backgroundImage
         };
 
         const templatesPath = path.join(__dirname, '..', 'templates');
@@ -149,7 +151,7 @@ async function main() {
             .toBuffer();
         console.log('Compressed image buffer successfully.');
 
-        const outputPath = path.join(process.cwd(), '.github/og-image.png');
+        const outputPath = path.join(process.cwd(), config.outputPath || '.github/og-image.png');
         fs.writeFileSync(outputPath, compressedImageBuffer);
         console.log(`OG image saved to ${outputPath}`);
     } else {
