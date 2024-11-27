@@ -8,8 +8,8 @@ class ImageGenerator {
         this.templatesPath = templatesPath;
     }
 
-    getImageDataUrl() {
-        const imagePath = path.join(this.templatesPath, 'assets', 'images', 'background-processing.png');
+    getImageDataUrl(backgroundImage) {
+        const imagePath = path.join(this.templatesPath, backgroundImage);
         const imageBuffer = fs.readFileSync(imagePath);
         return `data:image/png;base64,${imageBuffer.toString('base64')}`;
     }
@@ -31,7 +31,7 @@ class ImageGenerator {
         const templatePath = path.join(this.templatesPath, 'template.html');
         const template = fs.readFileSync(templatePath, 'utf8');
         const iconColor = '#f7f7f8';
-        data.background_image = this.getImageDataUrl();
+        data.background_image = this.getImageDataUrl(data.background_image);
         data.star_icon = this.getIconDataUrl('star', iconColor);
         data.fork_icon = this.getIconDataUrl('repo-forked', iconColor); 
         data.contributors_icon = this.getIconDataUrl('people', iconColor);
