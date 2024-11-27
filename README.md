@@ -32,6 +32,9 @@ Use the actual GitHub token instead of `<your github token>`.
 1. run `npm install` to install the dependencies.
 2. run `npm run generate` to generate the image.
 
+### Custom template
+
+If you know html/css and want to use a custom template, you can edit `template.html` to customize the layout, or create a new template and update the `templatePath` in `config.yml`.
 
 ### GitHub Actions Configuration
 
