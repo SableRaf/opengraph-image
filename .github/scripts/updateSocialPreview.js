@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const puppeteer = require('puppeteer');
 const yargs = require('yargs/yargs');
@@ -25,11 +24,11 @@ async function updateSocialPreview() {
     });
 
     const page = await browser.newPage();
-    await page.goto(`https://github.com/${owner}/${repo}/settings`);
+    await page.goto(`https://github.com/login`);
 
     // Log in to GitHub
-    await page.type('#login_field', process.env.GITHUB_USERNAME);
-    await page.type('#password', process.env.GITHUB_PASSWORD);
+    await page.type('#login_field', String(process.env.BOT_GITHUB_USERNAME));
+    await page.type('#password', String(process.env.BOT_GITHUB_PASSWORD));
     await page.click('[name="commit"]');
     await page.waitForNavigation();
 
