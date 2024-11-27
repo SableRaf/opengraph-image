@@ -132,7 +132,7 @@ async function main() {
             profile_picture_url: repoData.owner.avatar_url,
             config: config.elements, // Pass configuration to the template
             background_image: config.backgroundImage,
-            template_path: config.templatePath // Add this line to pass template path from config
+            template_file_name: config.templateFileName // Add this line to pass template path from config
         };
 
         const templatesPath = path.join(__dirname, '../templates'); 

@@ -1,8 +1,8 @@
 # Location and name of the output image relative to the root of the repository
 outputPath: ".github/og-image.png" 
 
-# Location and name of the template file 
-templatePath: "template.html"
+# Name of the template file 
+templateFileName: "template.html"
 
 # Location and name of the background image
 backgroundImage: "assets/images/background-stars.png"

@@ -28,7 +28,7 @@ class ImageGenerator {
     }
 
     renderTemplate(data, baseURL) {
-        const templatePath = path.join(baseURL, data.template_path);
+        const templatePath = path.join(baseURL, data.template_file_name);
         const template = fs.readFileSync(templatePath, 'utf8');
         const iconColor = '#f7f7f8';
         data.background_image = this.getImageDataUrl(data.background_image);
@@ -40,7 +40,7 @@ class ImageGenerator {
         data.font_url = this.getFontDataUrl();
         data.baseURL = baseURL;
         data.language_distribution = data.language_distribution || [];
-        data.profile_picture = data.profile_picture_url; // Add profile picture URL
+        data.profile_picture = data.profile_picture_url;
         return mustache.render(template, data);
     }
 
