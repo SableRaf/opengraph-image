@@ -26,10 +26,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Generate OG Image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/scripts/updateOpenGraphImage.js --owner ${{ github.repository_owner }} --repo ${{ github.event.repository.name }}
+      # - name: Generate OG Image
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: node .github/scripts/updateOpenGraphImage.js --owner ${{ github.repository_owner }} --repo ${{ github.event.repository.name }}
 
       - name: Update Social Preview
         run: node .github/scripts/updateSocialPreview.js --owner ${{ github.repository_owner }} --repo ${{ github.event.repository.name }}
