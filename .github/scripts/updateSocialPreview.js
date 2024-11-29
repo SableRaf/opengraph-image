@@ -75,7 +75,13 @@ async function updateSocialPreview() {
 
     console.log(`Navigated to https://github.com/${owner}/${repo}/settings`);
 
-    // log the page content for debugging
+    // Scroll to the bottom of the page to ensure that the "Social preview" section is loaded
+    await page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+    console.log('Scrolled to bottom of settings page.');
+
+    // // log the page content for debugging
     const content = await page.content();
     console.log(content);
 
