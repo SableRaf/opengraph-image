@@ -11,7 +11,8 @@
 -[x] Make all the stats optional (skip if the count is zero)
 -[x] Implement GitHub Action to generate the og image
 -[x] Run the action once a day at midnight UTC
--[] Update the Social Preview using Puppeteer (the GitHub API doesn't support this yet) 
+-[] Update the Social Preview using Puppeteer (the GitHub API doesn't support this yet)
+-[] Figure out a way to handle GitHub's device verification at login
 -[] Figure out the best way to login in Puppeteer (create an organisation so I can give the bot access to the settings page?)
 -[] Publish the action to GitHub Marketplace (https://docs.github.com/en/actions/sharing-automations/creating-actions/publishing-actions-in-github-marketplace)
 -[] Properly handle long repo names (with ellipsis)
