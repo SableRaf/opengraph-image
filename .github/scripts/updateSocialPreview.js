@@ -75,6 +75,16 @@ async function updateSocialPreview() {
 
     console.log(`Navigated to https://github.com/${owner}/${repo}/settings`);
 
+    // Scroll to the bottom of the page to ensure that the "Social preview" section is loaded
+    await page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+    console.log('Scrolled to bottom of settings page.');
+
+    // Take a screenshot of the social preview section for debugging    
+    await page.screenshot({ path: 'social-preview-screenshot.png', fullPage: true });
+    console.log('Screenshot taken.');
+
     await page.waitForSelector('label[for="repo-image-file-input"]');
     console.log('Image file input found.');
 
