@@ -62,7 +62,7 @@ async function updateSocialPreview() {
     await page.waitForNavigation();
     console.log('Logged in to GitHub.');
 
-    // Navigate to the social preview section
+    // Navigate to the social preview section of the repository settings
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
 
     // Verify that the navigation to the settings page was successful
@@ -81,18 +81,11 @@ async function updateSocialPreview() {
     });
     console.log('Scrolled to bottom of settings page.');
 
-    // Look for a tag with an action property that ends in /settings/open-graph-image
+    // Look for a form that has an action property that ends in /settings/open-graph-image
     const form = await page.$('form[action$="/settings/open-graph-image"]');
     if (!form) {
         console.error(`Could not find the Social Preview form for ${owner}/${repo}.`);
     }
-
-    await page.waitForSelector('#edit-social-preview-button');
-    console.log('Social preview edit button found.');
-
-    // Click the "Edit" button to start editing the social preview
-    await page.click('#edit-social-preview-button');
-    console.log('Clicked the edit button.');
 
     await page.waitForSelector('label[for="repo-image-file-input"]');
     console.log('Image file input found.');
@@ -112,9 +105,6 @@ async function updateSocialPreview() {
         document.querySelector('form[action$="/settings/open-graph-image"]').submit();
     });
     console.log('Form submitted.');
-
-    // Reload the page and verify that the social preview image was updated successfully
-    // console.log('Social preview image updated successfully.');
 
     await browser.close();
     console.log('Browser closed.');
