@@ -47,6 +47,16 @@ async function updateSocialPreview() {
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
     console.log(`Navigated to settings page of ${owner}/${repo}.`);
 
+    // Console log the content of all the h2 tags on the page for debugging purposes
+    const h2s = await page.$$eval('h2', h2s => h2s.map(h2 => h2.textContent));
+    console.log(`Found the following h2 tags: ${JSON.stringify(h2s)}`);
+
+    // Look for a tag with an action property that ends in /settings/open-graph-image
+    const form = await page.$('form[action$="/settings/open-graph-image"]');
+    if (!form) {
+        console.error(`Could not find the Social Preview form for ${owner}/${repo}.`);
+     }
+
     await page.waitForSelector('#edit-social-preview-button');
     console.log('Social preview edit button found.');
 
