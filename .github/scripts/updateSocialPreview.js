@@ -75,18 +75,6 @@ async function updateSocialPreview() {
 
     console.log(`Navigated to https://github.com/${owner}/${repo}/settings`);
 
-    // Scroll to the bottom of the page to ensure that the "Social preview" section is loaded
-    await page.evaluate(() => {
-        window.scrollTo(0, document.body.scrollHeight);
-    });
-    console.log('Scrolled to bottom of settings page.');
-
-    // Look for a form that has an action property that ends in /settings/open-graph-image
-    const form = await page.$('form[action$="/settings/open-graph-image"]');
-    if (!form) {
-        console.error(`Could not find the Social Preview form for ${owner}/${repo}.`);
-    }
-
     await page.waitForSelector('label[for="repo-image-file-input"]');
     console.log('Image file input found.');
 
