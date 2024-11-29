@@ -47,9 +47,23 @@ async function updateSocialPreview() {
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
     console.log(`Navigated to settings page of ${owner}/${repo}.`);
 
+    // Verify that the navigation to the settings page was successful
+    const currentUrl = await page.url();
+    if (currentUrl !== `https://github.com/${owner}/${repo}/settings`) {
+        console.error(`Failed to navigate to the settings page of ${owner}/${repo}. Current URL: ${currentUrl}`);
+        await browser.close();
+        process.exit(1);
+    }
+
     // Console log the content of all the h2 tags on the page for debugging purposes
     const h2s = await page.$$eval('h2', h2s => h2s.map(h2 => h2.textContent));
     console.log(`Found the following h2 tags: ${JSON.stringify(h2s)}`);
+
+    if (!h2s.includes('Social preview')) {
+        console.error(`"Social preview" section not found on the settings page.`);
+        await browser.close();
+        process.exit(1);
+    }
 
     // Look for a tag with an action property that ends in /settings/open-graph-image
     const form = await page.$('form[action$="/settings/open-graph-image"]');
