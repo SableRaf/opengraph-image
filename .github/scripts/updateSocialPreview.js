@@ -85,24 +85,24 @@ async function updateSocialPreview() {
     await page.screenshot({ path: 'social-preview-screenshot.png', fullPage: true });
     console.log('Screenshot taken.');
 
-    await page.waitForSelector('label[for="repo-image-file-input"]');
-    console.log('Image file input found.');
+    // await page.waitForSelector('label[for="repo-image-file-input"]');
+    // console.log('Image file input found.');
 
-    // Directly upload the new social preview image
-    const input = await page.$('input#repo-image-file-input');
-    if (!input) {
-        console.error('Could not find the file input element.');
-        await browser.close();
-        process.exit(1);
-    }
-    await input.uploadFile('.github/og-image.png');  // Make sure this path is correct!
-    console.log('Uploaded new social preview image.');
+    // // Directly upload the new social preview image
+    // const input = await page.$('input#repo-image-file-input');
+    // if (!input) {
+    //     console.error('Could not find the file input element.');
+    //     await browser.close();
+    //     process.exit(1);
+    // }
+    // await input.uploadFile('.github/og-image.png');  // Make sure this path is correct!
+    // console.log('Uploaded new social preview image.');
 
-    // Submit the form
-    await page.evaluate(() => {
-        document.querySelector('form[action$="/settings/open-graph-image"]').submit();
-    });
-    console.log('Form submitted.');
+    // // Submit the form
+    // await page.evaluate(() => {
+    //     document.querySelector('form[action$="/settings/open-graph-image"]').submit();
+    // });
+    // console.log('Form submitted.');
 
     await browser.close();
     console.log('Browser closed.');
