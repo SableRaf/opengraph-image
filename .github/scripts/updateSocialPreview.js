@@ -38,7 +38,7 @@ async function updateSocialPreview() {
     let missingCredentials = false;
 
     if (!process.env.BOT_GITHUB_USERNAME) {
-        console.error('BOT_GITHUB_USERNAME must be defined in the repository variables.');
+        console.error('BOT_GITHUB_USERNAME must be defined in the repository secrets.');
         missingCredentials = true;
     } else {
         console.log(`Username: ${process.env.BOT_GITHUB_USERNAME}`);
@@ -52,6 +52,7 @@ async function updateSocialPreview() {
     }
 
     if (missingCredentials) {
+        console.error('Missing credentials. Exiting...');
         process.exit(1);
     }
 
