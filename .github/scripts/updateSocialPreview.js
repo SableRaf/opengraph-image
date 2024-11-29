@@ -35,9 +35,19 @@ async function updateSocialPreview() {
     console.log('Navigated to GitHub login page.');
 
     // Check that the secrets are defined
-    if (!process.env.BOT_GITHUB_USERNAME || !process.env.BOT_GITHUB_PASSWORD) {
-        console.error('BOT_GITHUB_USERNAME and BOT_GITHUB_PASSWORD must be defined in the environment variables.');
-        await browser.close();
+    let missingCredentials = false;
+    
+    if (!process.env.BOT_GITHUB_USERNAME) {
+        console.error('BOT_GITHUB_USERNAME must be defined in the repository variables.');
+        missingCredentials = true;
+    } 
+    
+    if (!process.env.BOT_GITHUB_PASSWORD) {
+        console.error('BOT_GITHUB_PASSWORD must be defined in the repository secrets.');
+        missingCredentials = true;
+    }
+    
+    if (missingCredentials) {
         process.exit(1);
     } else {
         console.log(`Username: ${process.env.BOT_GITHUB_USERNAME}`);
