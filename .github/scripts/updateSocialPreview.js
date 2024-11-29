@@ -40,15 +40,11 @@ async function updateSocialPreview() {
     if (!process.env.BOT_GITHUB_USERNAME) {
         console.error('BOT_GITHUB_USERNAME must be defined in the repository secrets.');
         missingCredentials = true;
-    } else {
-        console.log(`Username: ${process.env.BOT_GITHUB_USERNAME}`);
     }
 
     if (!process.env.BOT_GITHUB_PASSWORD) {
         console.error('BOT_GITHUB_PASSWORD must be defined in the repository secrets.');
         missingCredentials = true;
-    } else {
-        console.log(`Password: ${process.env.BOT_GITHUB_PASSWORD.slice(0, 2)}${'*'.repeat(process.env.BOT_GITHUB_PASSWORD.length - 2)}`);
     }
 
     if (missingCredentials) {
@@ -68,7 +64,6 @@ async function updateSocialPreview() {
 
     // Navigate to the social preview section
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
-    console.log(`Navigated to settings page of ${owner}/${repo}.`);
 
     // Verify that the navigation to the settings page was successful
     const currentUrl = await page.url();
@@ -77,6 +72,12 @@ async function updateSocialPreview() {
         await browser.close();
         process.exit(1);
     }
+
+    console.log(`Navigated to https://github.com/${owner}/${repo}/settings`);
+
+    // log the page content for debugging
+    const content = await page.content();
+    console.log(content);
 
     // Wait for the settings page to fully load (the "Social preview" section should be visible)
     await page.waitForSelector('h2:contains("Social preview")');
