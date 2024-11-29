@@ -33,6 +33,7 @@ async function updateSocialPreview() {
 
     await page.goto(`https://github.com/login`);
     console.log('Navigated to GitHub login page.');
+    await page.screenshot({ path: 'step1-login-page.png', fullPage: true });
 
     // Check that the secrets are defined
     let missingCredentials = false;
@@ -49,6 +50,7 @@ async function updateSocialPreview() {
 
     if (missingCredentials) {
         console.error('Missing credentials. Exiting...');
+        await page.screenshot({ path: 'step2-missing-credentials.png', fullPage: true });
         process.exit(1);
     }
 
@@ -58,28 +60,34 @@ async function updateSocialPreview() {
 
     await page.click('[name="commit"]');
     console.log('Login form submitted.');
+    await page.screenshot({ path: 'step3-login-submitted.png', fullPage: true });
 
     await page.waitForNavigation();
     console.log('Logged in to GitHub.');
+    await page.screenshot({ path: 'step4-logged-in.png', fullPage: true });
 
     // Navigate to the social preview section of the repository settings
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
+    await page.screenshot({ path: 'step5-settings-page.png', fullPage: true });
 
     // Verify that the navigation to the settings page was successful
     const currentUrl = await page.url();
     if (currentUrl !== `https://github.com/${owner}/${repo}/settings`) {
         console.error(`Failed to navigate to the settings page of ${owner}/${repo}. Current URL: ${currentUrl}`);
+        await page.screenshot({ path: 'step6-navigation-failed.png', fullPage: true });
         await browser.close();
         process.exit(1);
     }
 
     console.log(`Navigated to https://github.com/${owner}/${repo}/settings`);
+    await page.screenshot({ path: 'step7-settings-page-loaded.png', fullPage: true });
 
     // Scroll to the bottom of the page to ensure that the "Social preview" section is loaded
     await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
     });
     console.log('Scrolled to bottom of settings page.');
+    await page.screenshot({ path: 'step8-scrolled-to-bottom.png', fullPage: true });
 
     // Take a screenshot of the social preview section for debugging    
     await page.screenshot({ path: 'social-preview-screenshot.png', fullPage: true });
