@@ -1,3 +1,6 @@
+>[!WARNING]
+> This tool is under construction. The GitHub action is not functional.
+
 This node.js tool generates a custom [OpenGraph](https://www.opengraph.xyz/) image that displays the repository details and stats. Your can choose what elements are included in the image and even use a custom background.
 
 ![Repo OpenGraph Image](example-og-image.png)
