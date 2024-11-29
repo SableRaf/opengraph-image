@@ -81,14 +81,6 @@ async function updateSocialPreview() {
     });
     console.log('Scrolled to bottom of settings page.');
 
-    // // log the page content for debugging
-    const content = await page.content();
-    console.log(content);
-
-    // Wait for the settings page to fully load (the "Social preview" section should be visible)
-    await page.waitForSelector('h2:contains("Social preview")');
-    console.log('Settings page fully loaded.');
-
     // Look for a tag with an action property that ends in /settings/open-graph-image
     const form = await page.$('form[action$="/settings/open-graph-image"]');
     if (!form) {
@@ -98,22 +90,31 @@ async function updateSocialPreview() {
     await page.waitForSelector('#edit-social-preview-button');
     console.log('Social preview edit button found.');
 
-    // Click the "Edit" button
+    // Click the "Edit" button to start editing the social preview
     await page.click('#edit-social-preview-button');
     console.log('Clicked the edit button.');
 
     await page.waitForSelector('label[for="repo-image-file-input"]');
     console.log('Image file input found.');
 
-    // Upload the new social preview image
-    const input = await page.$('input[name="repository[social_preview]"]');
-    await input.uploadFile('.github/og-image.png');
+    // Directly upload the new social preview image
+    const input = await page.$('input#repo-image-file-input');
+    if (!input) {
+        console.error('Could not find the file input element.');
+        await browser.close();
+        process.exit(1);
+    }
+    await input.uploadFile('.github/og-image.png');  // Make sure this path is correct!
     console.log('Uploaded new social preview image.');
 
-    await page.click('button[name="button"]');
-    console.log('Save button clicked.');
+    // Submit the form
+    await page.evaluate(() => {
+        document.querySelector('form[action$="/settings/open-graph-image"]').submit();
+    });
+    console.log('Form submitted.');
 
-    console.log('Social preview image updated successfully.');
+    // Reload the page and verify that the social preview image was updated successfully
+    // console.log('Social preview image updated successfully.');
 
     await browser.close();
     console.log('Browser closed.');
