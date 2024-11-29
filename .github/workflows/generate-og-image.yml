@@ -37,11 +37,14 @@ jobs:
           BOT_GITHUB_PASSWORD: ${{ secrets.BOT_GITHUB_PASSWORD }}
         run: node .github/scripts/updateSocialPreview.js --owner ${{ github.repository_owner }} --repo ${{ github.event.repository.name }}
 
-      - name: Upload Social Preview Screenshot
+      - name: Zip Screenshots
+        run: zip -r screenshots.zip *.png
+
+      - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: social-preview-screenshot
-          path: social-preview-screenshot.png
+          name: screenshots
+          path: screenshots.zip
 
       - name: Commit and push OG image
         run: |
