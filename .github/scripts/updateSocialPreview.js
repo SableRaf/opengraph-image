@@ -36,24 +36,25 @@ async function updateSocialPreview() {
 
     // Check that the secrets are defined
     let missingCredentials = false;
-    
+
     if (!process.env.BOT_GITHUB_USERNAME) {
         console.error('BOT_GITHUB_USERNAME must be defined in the repository variables.');
         missingCredentials = true;
-    } 
-    
+    } else {
+        console.log(`Username: ${process.env.BOT_GITHUB_USERNAME}`);
+    }
+
     if (!process.env.BOT_GITHUB_PASSWORD) {
         console.error('BOT_GITHUB_PASSWORD must be defined in the repository secrets.');
         missingCredentials = true;
+    } else {
+        console.log(`Password: ${process.env.BOT_GITHUB_PASSWORD.slice(0, 2)}${'*'.repeat(process.env.BOT_GITHUB_PASSWORD.length - 2)}`);
     }
-    
+
     if (missingCredentials) {
         process.exit(1);
-    } else {
-        console.log(`Username: ${process.env.BOT_GITHUB_USERNAME}`);
-        console.log(`Password: ${process.env.BOT_GITHUB_PASSWORD.slice(0, 2)}${'*'.repeat(process.env.BOT_GITHUB_PASSWORD.length-2)}`);
     }
-    
+
     // Log in to GitHub
     await page.type('#login_field', String(process.env.BOT_GITHUB_USERNAME));
     await page.type('#password', String(process.env.BOT_GITHUB_PASSWORD));
@@ -84,7 +85,7 @@ async function updateSocialPreview() {
     const form = await page.$('form[action$="/settings/open-graph-image"]');
     if (!form) {
         console.error(`Could not find the Social Preview form for ${owner}/${repo}.`);
-     }
+    }
 
     await page.waitForSelector('#edit-social-preview-button');
     console.log('Social preview edit button found.');
