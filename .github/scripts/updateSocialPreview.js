@@ -47,6 +47,10 @@ async function updateSocialPreview() {
     await page.goto(`https://github.com/${owner}/${repo}/settings`);
     console.log(`Navigated to settings page of ${owner}/${repo}.`);
 
+    // Wait for the settings page to fully load
+    await page.waitForSelector('h2');
+    console.log('Page fully loaded.');
+
     // Verify that the navigation to the settings page was successful
     const currentUrl = await page.url();
     if (currentUrl !== `https://github.com/${owner}/${repo}/settings`) {
@@ -54,6 +58,10 @@ async function updateSocialPreview() {
         await browser.close();
         process.exit(1);
     }
+
+    // Log the entire HTML content of the settings page for debugging purposes
+    const pageContent = await page.content();
+    console.log(`Page content: ${pageContent}`);
 
     // Console log the content of all the h2 tags on the page for debugging purposes
     const h2s = await page.$$eval('h2', h2s => h2s.map(h2 => h2.textContent));
