@@ -34,9 +34,13 @@ async function updateSocialPreview() {
     await page.goto(`https://github.com/login`);
     console.log('Navigated to GitHub login page.');
 
+    console.log(`Username: ${process.env.BOT_GITHUB_USERNAME}`);
+    console.log(`Password: ${process.env.BOT_GITHUB_PASSWORD.slice(0, 2)}${'*'.repeat(process.env.BOT_GITHUB_PASSWORD.length-2)}`);
+
     // Log in to GitHub
     await page.type('#login_field', String(process.env.BOT_GITHUB_USERNAME));
-    await page.type('#password', String(process.env.BOT_GITHUB_PASSWOR));
+    await page.type('#password', String(process.env.BOT_GITHUB_PASSWORD));
+
     await page.click('[name="commit"]');
     console.log('Login form submitted.');
 
