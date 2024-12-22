@@ -44,16 +44,19 @@ If you know html/css and want to use a custom template, you can edit `template.h
 
 At the moment of writing, the GitHub API doesn't have a feature update the Social Media Preview for the repository (though there is a feature request you can upvote [here](https://github.com/orgs/community/discussions/32166)). 
 
-As a workaround, we are using Puppeteer and a dedicated bot account to update the image. Why a separate account? Because we need to add login information to the repository secrets and it is not advisable to store your own credentials in there, even if they are supposed to stay hidden.
+> [!WARNING]
+> The workaround described below is not functional. Attempts to log in from the virtual environment of a GitHub Workflow triggers email 2FA. I briefly considered the possibility of having the bot fetch the OTP from an email—and I might still do it if my better judgment gets distracted long enough—but on a regular day, this is a level of rubber band and chewing gum even I am uncomfortable with.
+ 
+~~As a workaround, we are using Puppeteer and a dedicated bot account to update the image. Why a separate account? Because we need to add login information to the repository secrets and it is not advisable to store your own credentials in there, even if they are supposed to stay hidden.~~
 
-This workaround also means the repository needs to belong to an organisation, as this is the only way to give the bot account access to the settings for the repository.
+~~This workaround also means the repository needs to belong to an organisation, as this is the only way to give the bot account access to the settings for the repository.~~
 
-2. Create a dedicated bot account 
-3. Create a new [GitHub organization](https://github.com/settings/organizations) (it can be a free organization account) if you don't have one already
-4. Add the repository to your organisation
-5. Add the bot account as a collaborator with the 'Write' permission to the repository
-6. Create a `BOT_GITHUB_USERNAME` repository variable containing the bot account's username
-7. Create a `BOT_GITHUB_PASSWORD` repository **secret** containing the bot account's password
+~~1. Create a dedicated bot account~~
+~~2. Create a new [GitHub organization](https://github.com/settings/organizations) (it can be a free organization account) if you don't have one already~~
+~~3. Add the repository to your organisation~~
+~~4. Add the bot account as a collaborator with the 'Write' permission to the repository~~
+~~5. Create a `BOT_GITHUB_USERNAME` repository variable containing the bot account's username~~
+~~6. Create a `BOT_GITHUB_PASSWORD` repository **secret** containing the bot account's password~~
 
 ## References
 
