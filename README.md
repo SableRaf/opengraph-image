@@ -1,5 +1,5 @@
 >[!WARNING]
-> This tool is under construction. The GitHub action is not functional.
+> The image generator is working but the GitHub action to update the OG image for the repo is not functional. As of December 2024, the GitHub API doesn't have a feature update the Social Media Preview for a repository. A hacky puppeteer-based workaround could be implemented as a proof of concept, but this is a show stopper for any robust use case. Please upvote this [feature request](https://github.com/orgs/community/discussions/32166) and I will revisit this project if/when this feature is added to the API.
 
 This node.js tool generates a custom [OpenGraph](https://www.opengraph.xyz/) image that displays the repository details and stats. Your can choose what elements are included in the image and even use a custom background.
 
