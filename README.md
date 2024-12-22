@@ -45,7 +45,7 @@ If you know html/css and want to use a custom template, you can edit `template.h
 At the moment of writing, the GitHub API doesn't have a feature update the Social Media Preview for the repository (though there is a feature request you can upvote [here](https://github.com/orgs/community/discussions/32166)). 
 
 > [!WARNING]
-> The workaround described below is not functional. Attempts to log in from the virtual environment of a GitHub Workflow triggers email 2FA. I briefly considered the possibility of having the bot fetch the OTP from an email—and I might still do it if my better judgment gets distracted long enough—but on a regular day, this is a level of rubber band and chewing gum even I am uncomfortable with.
+> The workaround described below is not functional. Attempts to log in from the virtual environment of a GitHub Workflow triggers email 2FA. I briefly considered the possibility of having the bot fetch the OTP from an email—and I might still do it if my better judgment gets distracted long enough—but on a regular day, this is a level of rubber band and chewing gum even I am uncomfortable with. This is probably for the best as giving a bot write access to a repo that stores that same bot's username and password as secrets was already a stretch too far.
  
 ~~As a workaround, we are using Puppeteer and a dedicated bot account to update the image. Why a separate account? Because we need to add login information to the repository secrets and it is not advisable to store your own credentials in there, even if they are supposed to stay hidden.~~
 
